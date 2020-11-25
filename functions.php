@@ -84,9 +84,11 @@ function showMentor()
 	$id = $_SESSION['user']['id'];
 	$query = "SELECT mentor_id FROM users WHERE id=".$id;
 	$result = mysqli_query($db, $query);
-
+	$mentor=0;
 	$mentor_id = mysqli_fetch_row($result)[0];
-	$mentor = getUserById($mentor_id);
+	if($mentor_id != NULL){		
+		$mentor = getUserById($mentor_id);
+	}
 	return $mentor;
 }
 
