@@ -114,15 +114,14 @@ function getMentees()
 }
 
 // add mentee if add button is clicked
-if (isset($_GET['add'])) {
+if (isset($_POST['add'])) {
 	addMentee();
-	header('location: mentor.php');	
 }
 
 function addMentee(){	
 	global $db;
-	$id = $_SESSION['user']['id'];
-	$mentee_id = $_GET['add'];
+	$id = $_POST['id'];
+	$mentee_id = $_POST['mentee_id'];
 	$query = "UPDATE users SET mentor_id=". $id ." WHERE id=". $mentee_id;
 	$result = mysqli_query($db, $query);
 	if($result){

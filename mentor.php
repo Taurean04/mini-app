@@ -89,7 +89,7 @@ if (isset($_GET['logout'])) {
 				<tr>
 					<th><?php echo $mentees[0]?></th>
 					<th><?php echo $mentees[1]?></th>
-					<th><a href="mentor.php?add=<?php echo $mentees[0]?>" style="color: blue;" name="add">Add Mentee</a></th>
+					<th><button style="color: blue; border-radius: 8px; padding: 5px 24px; font-size: 10px;" name="add" onclick="updateMentor(<?php echo $_SESSION['user']['id'].", ".$mentees[0]?>)">Add Mentee</button></th>
 				</tr>
 				<?php } ?>
 			</table>
@@ -97,4 +97,23 @@ if (isset($_GET['logout'])) {
 		<?php endif ?>
 	</div>
 </body>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+	function updateMentor(id, mentee_id)
+	{
+		$.ajax({
+			url: 'functions.php',
+			type: 'post',
+			data: {add:true, "id": id, mentee_id:mentee_id},
+			success: function(output) 
+			{
+				alert('success, server says '+output);
+				window.location.href=window.location.href;
+			}, error: function()
+			{
+				alert('something went wrong, Adding mentee failed');
+			}
+		});
+	}
+</script>
 </html>
